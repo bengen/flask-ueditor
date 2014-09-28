@@ -1,21 +1,41 @@
-
-<!DOCTYPE HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+    <title>完整demo</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <title></title>
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/third-party/jquery-1.10.2.min.js"></script>
 
+    <style type="text/css">
+        div{
+            width:100%;
+        }
+    </style>
 </head>
 <body>
+<div>
+    <h1>Demo</h1>
+    <form action="/show/" method="post">
+        <script id="editor" type="text/plain" style="width:700px;height:300px;"></script>
+        <input type="hidden" name="content" >
+        <br />
+        <input type="submit" name="submit" value="submit"/>
+    </form>
+</div>
 
-    {% for content in contents %}
-        {{ content.content|safe }}
-        <hr>
-    {% endfor %}
+<script type="text/javascript">
+    var ue = UE.getEditor('editor');
 
+    $(function(){
+        $("form").submit(function(){
+            $("input[name=content]").val(ue.getAllHtml());
+            return true;
+        })
+    });
+
+</script>
 </body>
-
-
 </html>
-
